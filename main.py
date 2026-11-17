@@ -107,7 +107,7 @@ async def poll_mapy_loop() -> None:
                 resp = await client.get(url, params={"since": since}, headers=headers)
 
                 if resp.status_code in (401, 403):
-                    print(f"[Poller] Auth error ({resp.status_code}): Update COOKIES in main.py")
+                    print(f"[Poller] Auth error ({resp.status_code}): Update COOKIES in .env")
                 elif not resp.is_success:
                     print(f"[Poller] HTTP {resp.status_code}: {resp.text[:120]}")
                 else:

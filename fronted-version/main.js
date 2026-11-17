@@ -4,7 +4,7 @@ const fs = require('fs');
 // GLOBAL CONFIGURATION
 // ==========================================
 const POLL_INTERVAL_SECONDS = 30;
-const COOKIES = 'ds=2YCKPkqC0QnOfq1wYYnOfq1wYgpY3QvcXmyvQZMAE4yKHz_gY.LYtPK0QDKdQ9QDnSyWyZGwXDUqnj01QoCe8Ci4a8RKY; user-flags=xbF0U82JocAL0TK2Jj7rwI9bXeU*gqF1gag5NTA0MDAzNYKhYcOjc2JywqF2zmr8BVk; lps=eyJfcGVybWFuZW50Ijp0cnVlfQ.avqz2Q.Hg2twAywpcj1S_CV3gCJETMFupM; cw_util=eyJyaSI6ImQwODUzNjhhOGVhZTIxMzFiZmZiYzg2YzE0ZGMzMzY3IiwiY3d2YXIiOiJjb3AifQ; CloudFront-Key-Pair-Id=K2DQ3XB25DCF4N; User-Id=68fd6356cdafd2ab; euconsent-v2=CQtxssAQtxssAD3ACzCSC4FwAAAAAEPgAATIAAAAAAAA.ILdwQgAFAAQAAqABkAEAAKAAWgAyABoAEUAJIATAAnABbgC8AL8AYQBiAD8AICAQQBCACKAEcAJwAUIAzQBxADuAIQARYAjQBIgCkAFmANOAdsA94CHAEdAJWATaAqQBWQCyQFuALzAYQAxkBjYDLAGXANDAaiA2UB_gEBwIVgRmAjeBJoCVYErQKegVgAr4BYECwoFuwAAA.YAAAAAAAAQAA; szncmpone=0; CloudFront-Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5NDgyMTUzOH19fV19; CloudFront-Signature=jsBGqfW2SYTrrGmGZx7G55cpcm-zgtNMo~mdOr6JHBSxWWEoxktGwFdJujXWeIS5tp---9TSQEEF8i3qcu3hFHMq4GGlDeas2NcLHTqZ8E1Kwnb9nACMkqzn-6EyRP~yD5L0Gd4e4dXQR7rEdF-aaENHIeH7YJ2dvoWuNx6M5ZY2VZosQ3pyF815brFvrgeGmmc1ZslEM6hpkyYD83MIj8b9UaA2oe7uypz-~mZIjyZYACVuH1monqw1gGUmP28yqjzl4pux6oATmULkKaYy4ESZyCOOyc-~nL~YTW6cZTmWRgEubuVPmxYYJ6rpL9C~yZEkwpVzsZQDiKtkSa8Q4A__';
+const COOKIES = ''; //copy cookies
 const DATA_FILE = './positions.jsonl';
 const STATE_FILE = './state.json';
 // ==========================================
