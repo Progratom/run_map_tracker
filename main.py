@@ -8,6 +8,8 @@ import xml.etree.ElementTree as ET
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from typing import Optional
+import os
+from dotenv import load_dotenv
 
 import httpx
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -17,8 +19,10 @@ from pydantic import BaseModel
 # ==========================================
 # GLOBAL CONFIGURATION
 # ==========================================
+load_dotenv()
+
+cookie = os.getenv("COOKIE_TOKEN")
 POLL_INTERVAL_SECONDS = 30
-#"PASTE_COPIED_COOKIES_HERE"
 COOKIES = ""
 TRACKS_CSV = "tracks.csv"
 RUNNERS_JSON = "runners.json"
