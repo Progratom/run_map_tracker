@@ -1,7 +1,8 @@
-.venv/*
+.venv/
+__pycache__/
 tracks.csv
 runners.json
-test_gpx/*
+test_gpx/
 credentials.txt
 old/positions.jsonl
 old/state.json
