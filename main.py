@@ -270,13 +270,13 @@ def delete_runner(track_id: str):
     last_seen_ts.pop(track_id, None)
     return {"deleted": track_id}
 
-
 @app.post("/api/gpx")
 async def upload_gpx(
     file: UploadFile = File(...),
     name: str = Form(""),
     start_time: str = Form(""),
     end_time: str = Form(""),
+    override_times: bool = Form(False),
 ):
     raw_bytes = await file.read()
     try:
@@ -288,13 +288,19 @@ async def upload_gpx(
         raise HTTPException(status_code=400, detail="GPX must contain at least 2 points.")
 
     has_real_times = all(p["timestamp"] is not None for p in points)
-    force_uniform = bool(start_time.strip() and end_time.strip())
+    if has_real_times:
+        ts_values = [p["timestamp"] for p in points]
+        # samé stejné časy = k ničemu
+        has_real_times = max(ts_values) > min(ts_values)
 
-    if force_uniform or not has_real_times:
+    if has_real_times and not override_times:
+        points.sort(key=lambda p: p["timestamp"])
+        source = "gpx_real_time"
+    else:
         if not (start_time.strip() and end_time.strip()):
             raise HTTPException(
                 status_code=400,
-                detail="GPX lacks timestamps. Provide both start_time and end_time.",
+                detail="GPX lacks usable timestamps (or override is on). Provide both start_time and end_time.",
             )
         t_start = parse_iso_to_epoch(start_time.strip())
         t_end = parse_iso_to_epoch(end_time.strip())
@@ -314,8 +320,6 @@ async def upload_gpx(
             ratio = (cum_dist[i] / total_dist) if total_dist > 0 else (i / (len(points) - 1))
             p["timestamp"] = t_start + ratio * (t_end - t_start)
         source = "gpx_simulated"
-    else:
-        source = "gpx_real_time"
 
     track_id = f"gpx_{uuid.uuid4().hex[:8]}"
     track_name = name.strip() or os.path.splitext(file.filename or "GPX Track")[0]

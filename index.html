@@ -78,6 +78,11 @@
             <label>GPX File
               <input type="file" name="file" accept=".gpx" required />
             </label>
+            <div id="gpx-time-hint" style="font-size:11px;color:#64748b;"></div>
+            <label style="flex-direction:row; align-items:center; gap:6px;">
+              <input type="checkbox" name="override_times" id="override-times" disabled />
+              Ignorovat časy v GPX, použít start/end níže
+            </label>
             <label>Display Name (optional)
               <input type="text" name="name" placeholder="e.g. Target Pace" />
             </label>
@@ -375,6 +380,39 @@
       }
       if (coords.length > 0) map.fitBounds(coords, { padding: [30, 30] });
     }
+
+    const gpxForm = document.getElementById("gpx-form");
+    const gpxFileInput = gpxForm.elements.file;
+    const gpxHint = document.getElementById("gpx-time-hint");
+    const overrideCb = document.getElementById("override-times");
+    let gpxHasTimes = false;
+
+    function updateTimeFields() {
+      const useReal = gpxHasTimes && !overrideCb.checked;
+      gpxForm.elements.start_time.disabled = useReal;
+      gpxForm.elements.end_time.disabled = useReal;
+      overrideCb.disabled = !gpxHasTimes;
+    }
+
+    gpxFileInput.addEventListener("change", async () => {
+      gpxHasTimes = false;
+      gpxHint.textContent = "";
+      const f = gpxFileInput.files[0];
+      if (f) {
+        const doc = new DOMParser().parseFromString(await f.text(), "application/xml");
+        const pts = [
+          ...doc.getElementsByTagNameNS("*", "trkpt"),
+          ...doc.getElementsByTagNameNS("*", "rtept"),
+        ];
+        gpxHasTimes = pts.length > 0 &&
+          pts.every(p => p.getElementsByTagNameNS("*", "time").length > 0);
+        gpxHint.textContent = gpxHasTimes
+          ? "GPX obsahuje časové značky, použijí se."
+          : "GPX nemá časové značky, vyplň start a end.";
+      }
+      updateTimeFields();
+    });
+    overrideCb.addEventListener("change", updateTimeFields);
 
     async function refreshState() {
       const resp = await fetch("/api/state");
