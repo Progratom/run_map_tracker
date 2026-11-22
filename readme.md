@@ -15,6 +15,7 @@ pip install -r requirements.txt
 
 create Mapy.com account, let at least one person share position with you and copy this Cookie token - you may get one in developer view of website
 <img width="920" height="756" alt="image" src="https://github.com/user-attachments/assets/d91513d0-5525-471e-aaab-dfc1772a759d" />
+
 to add sharing of more people, just open the invite link with the same account (easiest way is to open it in the same browser)
 
 
