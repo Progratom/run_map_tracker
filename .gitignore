@@ -8,5 +8,6 @@ test_gpx/
 credentials.txt
 fronted-version/positions.jsonl
 fronted-version/state.json
-test/*
+tests/*
+tests/
 2025_version

@@ -1,12 +1,13 @@
 # Run map tracker
 app to track orienteering runners
 
-live tracking of gps location
+live tracking of gps location, upload of gpx, visualisation of progress
 
 
 
 ## run commands
 pip install -r requirements.txt
+
 create .env file with COOKIE_TOKEN - token from mapy.com website
 
 
